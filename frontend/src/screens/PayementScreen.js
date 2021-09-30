@@ -12,13 +12,13 @@ const PayementScreen = ({history}) => {
   if(!shippingAddress){
       history.push('/shipping')
   }
-  const [payementMethod, setPayementMethod] = useState('Paypal');
+  const [paymentMethod, setPaymentMethod] = useState('Paypal');
 
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePayementMethod({ payementMethod }));
+    dispatch(savePayementMethod({ paymentMethod }));
     history.push("/placeorder");
   };
 
@@ -34,7 +34,7 @@ Select Payement Method
        </Form.Group>
        <Col>
        <Form.Check type='radio' label='Paypal or credit card' id='Paypal'
-       name='payementMethod' value='Paypal' checked onChange={(e) =>setPayementMethod(e.target.value)}></Form.Check>
+       name='paymentMethod' value='Paypal' checked onChange={(e) =>setPaymentMethod(e.target.value)}></Form.Check>
        </Col>
         <Button type="submit" variant="primary">
           Continue
