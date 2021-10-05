@@ -54,6 +54,7 @@ const orderSchema = mongoose.Schema(
     paymentMethod: {
       type: String,
       required: true,
+      default:'Paypal'
     },
     paymentResult: {
       id: {

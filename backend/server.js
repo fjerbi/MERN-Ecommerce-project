@@ -5,10 +5,13 @@ import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import moodRoutes from "./routes/moodRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 const app = express();
 app.use(express.json());
 app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
 app.use("/api/blog", blogRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/mood", moodRoutes);
