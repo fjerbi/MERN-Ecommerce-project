@@ -4,7 +4,7 @@ import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { listUsers } from "../actions/userActions";
+import { listUsers, deleteUser } from "../actions/userActions";
 
 const UserListScreen = ({history}) => {
   const dispatch = useDispatch();
@@ -15,9 +15,11 @@ const UserListScreen = ({history}) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const deleteHandler = () => {
-    console.log("deleted");
-  };
+
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success:successDelete } = userDelete;
+
+
 
   
   useEffect(() => {
@@ -26,8 +28,17 @@ const UserListScreen = ({history}) => {
       }else{
           history.push('/login')
       }
-    dispatch(listUsers());
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo,successDelete]);
+
+
+  const deleteHandler = (id) => {
+    if(window.confirm('Are you sure')){
+      dispatch(deleteUser(id))
+    }
+
+  };
+
+
 
   return (
     <>
@@ -53,7 +64,7 @@ const UserListScreen = ({history}) => {
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>
-                  <a href={`mailto:${user.email}`}></a>
+                
                   {user.email}
                 </td>
                 <td>
@@ -64,7 +75,7 @@ const UserListScreen = ({history}) => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/user/${user._id}/edit`}>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant="light" className="btn-sm">
                       <i className="fas fa-edit"></i>
                     </Button>
